@@ -1,6 +1,4 @@
-Certainly! Below is a sample README file for your calculator calories web app. Please customize it according to your actual implementation:
 
-```markdown
 # Counter-Calories-JS Web App
 
 ## Overview
