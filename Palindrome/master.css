@@ -1,0 +1,315 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
+:root {
+  --bg-body: #3e5684;
+  --light-box: #7bdeff;
+  --dark-box: #4d4fa1;
+  --buttons: #8d69db;
+  /* text for bg light */
+  --light-tx: #15242c;
+  /* text for bg dark */
+  --dark-tx: #69d7db;
+
+  --box-radius: 12px;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 18px; /* Tamaño base de fuente */
+  color: var(--light-tx);
+}
+
+body {
+  margin: 0;
+  padding: 20px; /* Agrega un espacio alrededor del cuerpo */
+  height: auto;
+  background: var(--bg-body);
+  font-family: "Ubuntu", sans-serif, serif;
+  font-size: 1rem;
+}
+
+/* -------------------HOME-SECTION------------------------ */
+
+.home {
+  height: 30vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.img-profile {
+  height: 90px;
+  width: 90px;
+  margin: 20px auto;
+  align-content: center;
+  border-radius: 50%;
+}
+
+/* -----------------------------FORM-SECTION------------------------ */
+
+.form-div {
+  height: inherit;
+  text-align: center;
+  display: flexbox;
+  /* flex-direction: column; */
+  justify-content: center;
+  margin: 8px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: auto;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  margin: 0 auto;
+  background-color: var(--light-box);
+  border-radius: 18px;
+  -webkit-box-shadow: 0px 0px 37px 10px rgba(0, 0, 123, 0.28);
+  -moz-box-shadow: 0px 0px 37px 10px rgba(0, 0, 123, 0.28);
+  box-shadow: 0px 0px 37px 10px rgba(0, 0, 123, 0.28);
+}
+
+#checked-section {
+  display: flex;
+  width: 100%;
+  margin: 10px auto;
+}
+
+#text-label,
+#text-input,
+#check-btn {
+  margin: 8px auto;
+}
+
+#text-input,
+#check-btn {
+  padding: 8px;
+}
+
+#check-btn {
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: var(--box-radius);
+  border-width: 0;
+  margin-left: 0;
+  cursor: pointer;
+   background-image/*color*/: url(./img/img-noise-361x370.png)/*, var(--buttons) */;
+}
+
+#check-btn:hover{
+  background: var(--buttons);
+  min-width: 1.2rem;
+}
+
+#text-input {
+  border-bottom: 1px solid var(--light-tx);
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  margin-right: 8px;
+  background-color: var(--light-box);
+  min-width: 3rem;
+}
+
+.result {
+  visibility: visible;
+  height: auto;
+  width: auto;
+}
+
+/* -----------------------------INFO-SECTION------------------------ */
+
+.info-about {
+  display: flexbox;
+  height: inherit;
+  width: 30%;
+  text-align: center;
+  justify-content: center;
+  margin: 8px auto;
+  border-radius: var(--box-radius);
+  background-color: var(--light-box);
+}
+
+.info {
+  display: flex;
+}
+
+.info span {
+  margin-top: 0.8rem;
+  margin-left: auto;
+  height: auto;
+  width: auto;  
+}
+
+@media screen and (max-width: 376px) {
+  .form {
+    width: 90%; /* Increase width to better fit small screen */
+  }
+
+  #text-input,
+  #check-btn {
+    padding: 4px; /* Reduce padding for small screen */
+  }
+
+  #check-btn {
+    padding-left: 12px; /* Reduce padding for small screen */
+    padding-right: 12px; /* Reduce padding for small screen */
+  }
+
+  #text-input {
+    min-width: 1.5rem; /* Reduce minimum width for small screen */
+    
+  }
+
+  .form,
+  .info-about {
+    width: 90%; /* Reducir el ancho en pantallas más pequeñas */
+    padding: 8px;
+  }
+}
+
+@media screen and (max-width: 431px) {
+
+  #check-btn {
+    padding-left: 8px; /* Reduce padding for small screen */
+    padding-right: 12px; /* Reduce padding for small screen */
+    width: auto;
+    font-size: 0.8rem;
+  }
+
+  #text-input {
+    min-width: 1.5rem; /* Reduce minimum width for small screen */
+    width: 50%;
+  }
+
+  .form,
+  .info-about {
+    width: 90%; /* Reducir el ancho en pantallas más pequeñas */
+    padding: 12px;
+  }
+}
+/* ipad air */
+@media screen and (max-width: 1025px) {
+
+  #check-btn {
+    padding-left: 8px; /* Reduce padding for small screen */
+    padding-right: 12px; /* Reduce padding for small screen */
+    width: auto;
+    font-size: 1.1rem;
+  }
+
+  #text-input {
+    min-width: 1.5rem; /* Reduce minimum width for small screen */
+    width: 50%;
+  }
+
+  .form,
+  .info-about {
+    width: 50%; /* Reducir el ancho en pantallas más pequeñas */
+    padding: 12px;
+  }
+
+  #text-input,
+  #text-label,
+  .info-about{
+    font-size: 1.6rem;
+  }
+
+}
+
+@media screen and (max-width: 541px) {
+
+  #check-btn {
+    padding-left: 8px; /* Reduce padding for small screen */
+    padding-right: 12px; /* Reduce padding for small screen */
+    width: auto;
+    font-size: 1.1rem;
+  }
+
+  #text-input {
+    min-width: 1.5rem; /* Reduce minimum width for small screen */
+    width: 50%;
+  }
+
+  .form,
+  .info-about {
+    width: 50%; /* Reducir el ancho en pantallas más pequeñas */
+    padding: 12px;
+  }
+
+  #text-input,
+  #text-label,
+  .info-about{
+    font-size: 1rem;
+  }
+
+}
+
+@media screen and (max-width: 281px) {
+
+  #check-btn {
+    padding-left: 8px; /* Reduce padding for small screen */
+    padding-right: 12px; /* Reduce padding for small screen */
+    width: auto;
+    font-size: 0.6rem;
+  }
+
+  #text-input {
+    min-width: 1.5rem; /* Reduce minimum width for small screen */
+    width: 50%;
+  }
+
+  .form,
+  .info-about {
+    width: 50%; /* Reducir el ancho en pantallas más pequeñas */
+    padding: 12px
+  }
+
+  .form {
+    margin-top: 25px;
+  }
+
+  .info-about{
+    border-radius: 18px;
+  }
+
+  #text-input,
+  #text-label,
+  .info-about{
+    font-size: 0.7rem;
+  }
+
+}
+
+@media screen and (max-width: 413px) {
+
+  #check-btn {
+    padding-left: 8px; /* Reduce padding for small screen */
+    padding-right: 12px; /* Reduce padding for small screen */
+    width: auto;
+    padding-top: 0.1px;
+    padding-bottom: 0.1px;
+    font-size: 0.6rem;
+  }
+
+  #text-input {
+    min-width: 1.5rem; /* Reduce minimum width for small screen */
+    width: 50%;
+  }
+
+  .form,
+  .info-about {
+    width: 50%; /* Reducir el ancho en pantallas más pequeñas */
+    padding: 12px;
+  }
+
+  #text-input,
+  #text-label,
+  .info-about{
+    font-size: 1rem;
+  }
+
+}
