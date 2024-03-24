@@ -1,0 +1,66 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+
+form{
+    display: flexbox;
+    border: 1px solid black;
+    margin: 0 auto;
+    padding: 16px;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+}
+
+#user-input,
+#check-btn,
+#clear-btn,
+#results-div {
+  margin: 10px auto;
+  padding: 5px;
+}
+#user-input {
+  max-width: 600px;
+  padding: 5px;
+}
+
+#check-btn,
+#clear-btn{
+    display: inline-flexbox;
+}
+
+#results-div{
+    visibility: hidden;
+    border: 1px solid black;
+}
+
+input[type="text"], button {
+    width: 100%; /* Se adapta al ancho del contenedor padre */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+    padding: 10px; /* Espacio interior para el texto */
+    font-size: 16px; /* Tamaño del texto */
+}
+
+@media (max-width: 600px) {
+  #user-input,
+  #results-div {
+    width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+    input[type="text"] {
+        width: 50%; /* Reduce el ancho en pantallas más grandes */
+    }
+
+    button{
+        width: 90%;
+    }
+}
