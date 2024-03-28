@@ -25,6 +25,7 @@ body {
 }
 
 #title {
+  color: var(--light-grey);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,6 +68,15 @@ body {
   font-size: 18px;
 }
 
+#display-price {
+  color: var(--light-grey);
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: 600;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ************************************************************************************************ */
 
 #dessert-card-container {
@@ -97,6 +107,7 @@ body {
   background-image: linear-gradient(var(--golden-yellow), var(--orange));
   border-color: var(--gold);
   border-width: 3px;
+  
 }
 
 .btn:hover {
