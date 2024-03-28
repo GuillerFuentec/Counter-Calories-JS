@@ -1,5 +1,6 @@
-//display class
-
+/***********************************
+ * Clase CashRegister              *
+ ***********************************/
 class CashRegister {
   constructor(price, cash, cid) {
     this.price = price;
@@ -19,85 +20,32 @@ class CashRegister {
     };
   }
 
-  totalAmountCustomer() {
-    return this.price.reduce((acc, curr) => acc + curr, 0);
+  totalAmountCustomer(price) {
+    const totalPrice = this.price.reduce((acc, price) => acc + price, 0);
+    return totalPrice;
   }
 
-  dueAmount() {
-    if (this.cash < this.totalAmountCustomer()) {
-      //
-      alert("Customer does not have enough money to purchase the item");
-      return;
-    } else {
-      //
-      switch (!isNaN(this.cash)) {
-        //
-        case this.cash === this.totalAmountCustomer():
-          return this.printAmount();
-
-        case this.cash > this.totalAmountCustomer():
-          //
-          let dueChange = this.cash - this.price;
-          this.change = [];
-
-          for (let index = cid.length - 1; index >= 0; index--) {
-            //
-
-            const [moneyTag, moneyTotal] = this.cid[index];
-            const moneyValue = this.currencyUnit[moneyTag];
-            let coinCount = Math.min(
-              Math.floor(dueChange / moneyValue),
-              moneyTotal / moneyValue
-            );
-            if (coinCount > 0) {
-              dueChange -= moneyValue * moneyTotal;
-              dueChange = Number(dueChange.toFixed(2));
-              this.change.push([moneyTag, moneyValue * coinCount]);
-            }
-          }
-
-          if (dueChange < 0) {
-            this.printAmount();
-            return;
-          } else {
-            return this.change;
-          }
-
-        default:
-          alert("Invalid Amount");
-          break;
-      }
-    }
-  }
-
-  currentAmount() {
-    const cidObject = Object.fromEntries(cid);
-
-    for (let i = 0; i < this.change.length; i++) {
-      const [moneyTag, moneyAmount] = this.change[i];
-      cidObject[moneyTag] -= moneyAmount;
-    }
-
-    this.cid = Object.entries(cidObject);
-
-    return this.cid;
-  }
-
-  printAmount() {
+  dueAmount(result) {
     const totalAmount = this.totalAmountCustomer();
     const changeDue = this.cash - totalAmount;
 
     if (changeDue < 0) {
-      // No hay suficiente efectivo para dar cambio
-      changeDueAmount.innerHTML = `<div id="change-due"><p>Status: INSUFFICIENT_FUNDS</p></div>`;
+      result.innerHTML = `<div id="change-due"><p>Status: INSUFFICIENT_FUNDS</p></div>`;
     } else if (changeDue === 0) {
-      // El cliente pagó con el monto exacto
-      changeDueAmount.innerHTML = `<div id="change-due"><p>No change due - customer paid with exact cash</p></div>`;
+      let changeText = `Status: CLOSED`;
+      //
+      for (let i = 0; i < this.cid.length; i++) {
+        const [moneyTag, moneyTotal] = this.cid[i];
+        if (moneyTotal > 0) {
+          changeText += ` ${moneyTag}: $${moneyTotal.toFixed(2)}`;
+        }
+      }
+      result.innerHTML = `<div id="change-due">
+            <p>${changeText}</p>
+        </div>`;
     } else {
-      // Calcular el cambio
-
-      let change = [];
       let remainingChange = changeDue;
+      const change = [];
 
       for (let i = this.cid.length - 1; i >= 0; i--) {
         const [moneyTag, moneyTotal] = this.cid[i];
@@ -116,26 +64,33 @@ class CashRegister {
       }
 
       if (remainingChange > 0) {
-        // No se puede devolver el cambio exacto
-        changeDueAmount.innerHTML = `<div id="change-due"><p>Status: INSUFFICIENT_FUNDS</p></div>`;
+        result.innerHTML = `<div id="change-due"><p>Status: INSUFFICIENT_FUNDS</p></div>`;
       } else {
-        // Formatear el cambio
         const formattedChange = change
-          .map(([moneyTag, billAmount]) => `${moneyTag}: $${billAmount}`)
+          .map(
+            ([moneyTag, billAmount]) => `${moneyTag}: $${billAmount.toFixed(2)}`
+          )
           .join(" ");
-        changeDueAmount.innerHTML = `<div id="change-due"><p>Status: OPEN ${formattedChange}</p></div>`;
+        result.innerHTML = `<div id="change-due"><p>Status: OPEN ${formattedChange}</p></div>`;
       }
     }
   }
+
+  printAmount() {
+    // Llamar al método dueAmount() para determinar el estado y presentar el cambio debido
+    this.dueAmount(result);
+  }
 }
 
-/********************************** * variables * **********************************/
-let cash = document.querySelector("#cash");
+/***********************************
+ * Variables globales              * 
+ ***********************************/
+let cash = document.getElementById("cash");
 const dessertCards = document.getElementById("dessert-card-container");
 const totalDisplayed = document.getElementById("display-price");
-const changeDueAmount = document.getElementById("change-due");
-const totalPrice = [];
-// let price = 1.87;
+const result = document.getElementById("change-due");
+const resultBtn = document.getElementById("purchase-btn");
+let totalPrice = 0;
 let cid = [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
@@ -148,7 +103,27 @@ let cid = [
   ["ONE HUNDRED", 100],
 ];
 
-// Products of main Grocery Store
+/***********************************
+ * Funciones de utilidad           *
+ ***********************************/
+function updateTotalPrice(index) {
+  totalPrice += products[index].price;
+  return totalDisplayed.innerHTML = `<div id="display-price">
+        <p>The current total cost is: ${totalPrice.toFixed(2)}
+    </p></div>`;
+}
+
+/***********************************
+ * Manejadores de eventos          *
+ ***********************************/
+resultBtn.addEventListener("click", () => {
+  let cashRegister = new CashRegister(totalPrice, cash.value, cid);
+  cashRegister.printAmount();
+});
+
+/***********************************
+ * Lógica para mostrar productos   *
+ ***********************************/
 const products = [
   {
     name: "Vanilla Cupcakes (6 Pack)",
@@ -193,7 +168,7 @@ const products = [
   {
     name: "Hershey's Chocolate Bar",
     price: 2.29,
-  },
+  }
 ];
 
 products.forEach(({ name, price }, index) => {
@@ -211,8 +186,6 @@ products.forEach(({ name, price }, index) => {
 products.forEach((_, index) => {
   const btn = document.getElementById(`btn${index}`);
   btn.addEventListener("click", () => {
-    totalDisplayed.innerHTML = `<div id="display-price">
-            <p>The current total cost is: ${5}</p>
-        </div>`;
+    totalDisplayed.innerHTML = updateTotalPrice(index);
   });
 });
