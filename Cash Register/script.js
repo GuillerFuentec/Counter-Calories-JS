@@ -2,7 +2,7 @@
  * Clase CashRegister              *
  ***********************************/
 class CashRegister {
-  constructor(price, cash, cid) {
+  constructor(price, cash, cid, result) {
     this.price = price;
     this.cash = cash;
     this.cid = cid;
@@ -18,19 +18,21 @@ class CashRegister {
       TWENTY: 20,
       "ONE HUNDRED": 100,
     };
+    this.result = result;
   }
 
-  totalAmountCustomer(price) {
-    const totalPrice = this.price.reduce((acc, price) => acc + price, 0);
+  totalAmountCustomer() {
+    let totalPrice = 0;
+    totalPrice += this.price;
     return totalPrice;
   }
 
-  dueAmount(result) {
-    const totalAmount = this.totalAmountCustomer();
+  dueAmount(price) {
+    const totalAmount = this.totalAmountCustomer(price);
     const changeDue = this.cash - totalAmount;
 
     if (changeDue < 0) {
-      result.innerHTML = `<div id="change-due"><p>Status: INSUFFICIENT_FUNDS</p></div>`;
+      return `<div id="change-due"><p>Status: INSUFFICIENT_FUNDS</p></div>`;
     } else if (changeDue === 0) {
       let changeText = `Status: CLOSED`;
       //
@@ -40,7 +42,7 @@ class CashRegister {
           changeText += ` ${moneyTag}: $${moneyTotal.toFixed(2)}`;
         }
       }
-      result.innerHTML = `<div id="change-due">
+      return `<div id="change-due">
             <p>${changeText}</p>
         </div>`;
     } else {
@@ -64,32 +66,28 @@ class CashRegister {
       }
 
       if (remainingChange > 0) {
-        result.innerHTML = `<div id="change-due"><p>Status: INSUFFICIENT_FUNDS</p></div>`;
+        return `<div id="change-due"><p>Status: INSUFFICIENT_FUNDS</p></div>`;
       } else {
         const formattedChange = change
           .map(
             ([moneyTag, billAmount]) => `${moneyTag}: $${billAmount.toFixed(2)}`
           )
           .join(" ");
-        result.innerHTML = `<div id="change-due"><p>Status: OPEN ${formattedChange}</p></div>`;
+        return `<div id="change-due"><p>Status: OPEN ${formattedChange}</p></div>`;
       }
     }
-  }
-
-  printAmount() {
-    // Llamar al método dueAmount() para determinar el estado y presentar el cambio debido
-    this.dueAmount(result);
   }
 }
 
 /***********************************
- * Variables globales              * 
+ * Variables globales              *
  ***********************************/
-let cash = document.getElementById("cash");
 const dessertCards = document.getElementById("dessert-card-container");
 const totalDisplayed = document.getElementById("display-price");
 const result = document.getElementById("change-due");
 const resultBtn = document.getElementById("purchase-btn");
+const cleartBtn = document.getElementById("clear-btn");
+const form = document.getElementById("form");
 let totalPrice = 0;
 let cid = [
   ["PENNY", 1.01],
@@ -108,19 +106,10 @@ let cid = [
  ***********************************/
 function updateTotalPrice(index) {
   totalPrice += products[index].price;
-  return totalDisplayed.innerHTML = `<div id="display-price">
+  return (totalDisplayed.innerHTML = `<div id="display-price">
         <p>The current total cost is: ${totalPrice.toFixed(2)}
-    </p></div>`;
+    </p></div>`);
 }
-
-/***********************************
- * Manejadores de eventos          *
- ***********************************/
-resultBtn.addEventListener("click", () => {
-  let cashRegister = new CashRegister(totalPrice, cash.value, cid);
-  cashRegister.printAmount();
-});
-
 /***********************************
  * Lógica para mostrar productos   *
  ***********************************/
@@ -168,7 +157,7 @@ const products = [
   {
     name: "Hershey's Chocolate Bar",
     price: 2.29,
-  }
+  },
 ];
 
 products.forEach(({ name, price }, index) => {
@@ -188,4 +177,28 @@ products.forEach((_, index) => {
   btn.addEventListener("click", () => {
     totalDisplayed.innerHTML = updateTotalPrice(index);
   });
+});
+
+/***********************************
+ * Handle Events                   *
+ ***********************************/
+
+resultBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  const cashInput = document.getElementById("cash");
+  const cash = parseFloat(cashInput.value);
+  products.forEach((_, index) => {
+    const { _name, price } = products[index];
+    let currentPrice = price;
+    const cashRegister = new CashRegister(currentPrice, cash, cid);
+    result.innerHTML = cashRegister.dueAmount(currentPrice);
+  });
+});
+
+cleartBtn.addEventListener("click", (event) => {
+  form.reset();
+  event.preventDefault();
+  totalPrice = 0;
+  totalDisplayed.innerHTML = "";
+  result.innerHTML = "";
 });

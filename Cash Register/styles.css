@@ -50,6 +50,7 @@ body {
   max-width: 300px;
 }
 
+#clear-btn,
 #purchase-btn {
   cursor: pointer;
   padding: 10px 20px;
@@ -61,11 +62,18 @@ body {
   background-image: linear-gradient(var(--golden-yellow), var(--orange));
   border-color: var(--gold);
   border-width: 3px;
+  margin-top: 8px;
 }
 
 #change-due {
-  margin-top: 20px;
+  color: var(--light-grey);
+  margin: 20px;
   font-size: 18px;
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: 600;
+  align-items: center;
+  justify-content: center;
 }
 
 #display-price {
@@ -75,6 +83,16 @@ body {
   font-weight: 600;
   align-items: center;
   justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    background-color: var(--grey);
+    padding: 2rem;
+    width: 26rem;
+
 }
 
 /* ************************************************************************************************ */
