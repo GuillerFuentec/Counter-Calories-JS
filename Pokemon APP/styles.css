@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
+:root {
+  --bg-body: #3e5684;
+  --light-box: #7bdeff;
+  --dark-box: #4d4fa1;
+  --buttons: #8d69db;
+  /* text for bg light */
+  --light-tx: #15242c;
+  /* text for bg dark */
+  --dark-tx: #69d7db;
+
+  --box-radius: 12px;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 18px; /* Tamaño base de fuente */
+  color: var(--light-tx);
+}
+
+body {
+  margin: 0;
+  padding: 20px; /* Agrega un espacio alrededor del cuerpo */
+  height: auto;
+  background: var(--bg-body);
+  font-family: "Ubuntu", sans-serif, serif;
+  font-size: 1rem;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: auto;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  margin: 0 auto;
+  background-color: var(--light-box);
+  border-radius: 18px;
+  align-items: center;
+}
+
+#search-input {
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: var(--box-radius);
+  border-width: 0;
+  margin-left: 0;
+  cursor: pointer;
+  background-image/*color*/: url()
+    /*, var(--buttons) */;
+}
+
+#search-button {
+  background: var(--buttons);
+  min-width: 1.2rem;
+  padding: 8px;
+}
+
+/* Estilos para la información del Pokemon */
+#pokemon-info {
+    height: auto;
+  margin: 20px 0;
+}
+
+.display-info {
+    height: auto;
+    /* visibility: hidden; */
+}
+
+.pokemon-atributes {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+
+}
+
+
+/* Media queries para hacer el sitio responsive */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  #search-input,
+  #search-button {
+    width: 100%;
+  }
+}
