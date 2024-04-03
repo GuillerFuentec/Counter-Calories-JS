@@ -13,7 +13,7 @@
         <div class="app" id="app">
             <form action="" class="form">
                 <label for="pokemon">Search for Pokémon Name or ID:
-                    <input type="text" id="search-input" name="pokemon" placeholder="Buscar Pokemon">
+                    <input required type="text" id="search-input" name="pokemon" placeholder="Buscar Pokemon">
                 </label>
                 <button id="search-button">Search</button>
             </form>
@@ -21,7 +21,7 @@
             <div id="pokemon-info">
                 <table>
                     <tr>
-                        <td>Pokemon Name:</td>
+                        <td id="pokemon-name"></td>
                         <td><span id="pokemon-id"></span></td>
                     </tr>
                     <tr>
@@ -32,11 +32,6 @@
                         <td>Height:</td>
                         <td><span id="height"></span></td>
                     </tr>
-                </table>
-                <img src="" alt="pokemon-avatar">
-                <p id="types"></p>
-
-                <table>
                     <tr>
                         <td>HP:</td>
                         <td><span id="hp"></span></td>
@@ -62,8 +57,9 @@
                         <td><span id="speed"></span></td>
                     </tr>
                 </table>
-
-            </div>
+                <p id="types"></p>
+                <img id="sprite" src="" alt="pokemon-sprite">
+              </div>
         </div>
         </div>
     </main>
